@@ -4,14 +4,20 @@ const { usuarioConectado, usuarioDesconectado, guardarMensaje }=require('../cont
 
 
 // Mensajes de Sockets
-io.on('connection', client => {
+io.on('connection', async (client) => {
     console.log('Cliente conectado');
     // Validar token
     const [valido,uid]=comprobarJWT(client.handshake.headers['x-token']);
 //    Verificar autenticacion
     if(!valido){return client.disconnect()}//Desconectar del socket
+
+    
+
     // Cliente autenticado
-    usuarioConectado(uid);
+    await usuarioConectado(uid);
+
+    // Emitir evento para actualizar estado usuarios
+    io.emit('update-estado');
 
     // Ingresar a una sala
     client.join(uid);//Unir al cliente una sala con ese uid
@@ -25,9 +31,11 @@ io.on('connection', client => {
     
 
 
-    client.on('disconnect', () => {
+    client.on('disconnect', async() => {
         console.log('Cliente desconectado');
-        usuarioDesconectado(uid);
+        
+        await usuarioDesconectado(uid);
+        io.emit('update-estado');
     });
 
    

@@ -1,5 +1,9 @@
 const Usuario=require('../models/usuarioModel');
 const Message=require('../models/msgModel');
+
+
+
+
 const usuarioConectado=async(uid='')=>{
     const usuario=await Usuario.findById(uid);
     usuario.online=true;
