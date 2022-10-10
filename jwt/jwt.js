@@ -20,6 +20,18 @@ const generarJWT = (uid) => {
   });
 };
 
+const comprobarJWT=(token='')=>{//Comprobar que el token sea valido socket
+  try {
+    const {uid}=jwt.verify(token,process.env.JWT_KEY);
+    return [true,uid];
+
+  } catch (e) {
+    console.log(e)
+    return [false,null];
+  }
+}
+
 module.exports = {
   generarJWT,
+  comprobarJWT
 };

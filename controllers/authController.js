@@ -44,16 +44,16 @@ const login = async (req, res = response) => {
   const { email, password } = req.body;
 
   try {
-    const usuarioDB = await Usuario.findOne({ email });
+    const usuario = await Usuario.findOne({ email });
     // Validar correo
-    if (!usuarioDB) {
+    if (!usuario) {
       return res.status(404).json({
         ok: false,
         msg: "Verifica el correo",
       });
     }
     // Validar password
-    const validPassword = bcrypt.compareSync(password, usuarioDB.password);
+    const validPassword = bcrypt.compareSync(password, usuario.password);
     if (!validPassword) {
       return res.status(400).json({
         ok: false,
@@ -62,11 +62,11 @@ const login = async (req, res = response) => {
     }
     // Generar JWT
 
-    const token = await generarJWT(usuarioDB.id);
+    const token = await generarJWT(usuario.id);
 
     res.json({
       ok: true,
-      usuarioDB,
+      usuario,
       token,
     });
   } catch (e) {

@@ -25,6 +25,10 @@ const usuarioSchema=Schema({
     online:{
         type:Boolean,
         default:false
+    },
+    lic:{
+        type:Boolean,
+        default:false
     }
 });
 usuarioSchema.method('toJSON',function(){
