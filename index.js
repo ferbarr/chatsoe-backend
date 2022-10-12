@@ -31,14 +31,14 @@ app.use( express.static( publicPath ) );
 app.use('/chatsoe',routes);
 
 
+app.set('puerto', process.env.PORT || 3000);
 
 
-
-server.listen( process.env.PORT, ( err ) => {
+server.listen(app.get('puerto'), ( err ) => {
 
     if ( err ) throw new Error(err);
 
-    console.log('Servidor corriendo en puerto', process.env.PORT );
+    console.log('Servidor corriendo en puerto', app.get('puerto'));
 
 });
 
