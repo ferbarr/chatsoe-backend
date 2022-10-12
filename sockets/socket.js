@@ -38,7 +38,8 @@ io.on('connection', async (client) => {
         io.emit('update-estado');
     });
 
-   
-
-
 });
+
+module.exports={
+    io
+}

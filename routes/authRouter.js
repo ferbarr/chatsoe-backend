@@ -9,7 +9,7 @@ const router=Router();
 router.post('/new',[
     check('name','El nombre es obligatorio').not().isEmpty(),
     check('email','Formato de email no valido').isEmail(),
-    check('password','Minímo 6 carácteres').isLength(6),
+    check('password','Minímo 6 carácteres').isLength(8),
     check('phone','Formato de teléfono incorrecto').isLength({min:10,max:10}),
     validarCampos
 
@@ -17,7 +17,7 @@ router.post('/new',[
 
 router.post('/',[
     check('email','Formato de email no valido').isEmail(),
-    check('password','Minímo 6 carácteres').isLength(6),
+    check('password','Minímo 6 carácteres').isLength(8),
     validarCampos
 
 ],login);
