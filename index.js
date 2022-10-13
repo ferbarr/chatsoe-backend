@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fileUpload = require('express-fileupload');
+const morgan = require('morgan')
 const routes=require('./routes');
 require('dotenv').config();
 
@@ -14,6 +15,7 @@ const app = express();
 
 //Lectura y parseo del body
 app.use(express.json());
+app.use(morgan('dev'));
 app.use(express.urlencoded({extended:true}));
 // Lectura de archivos
 app.use(fileUpload({

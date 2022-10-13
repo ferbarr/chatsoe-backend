@@ -12,7 +12,8 @@ const usuarioSchema=Schema({
     },
     password:{
         type:String,
-        required:true
+        required:true,
+        minlength:[8,'Minimo 6 letras']
     },
     photo:{
         type:String,

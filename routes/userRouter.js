@@ -10,6 +10,7 @@ const router=Router();
 router.get('/get-users',validarJWT,getUsuarios)
 
 router.put('/update',[
+    validarJWT,
     check('_id', 'Id no valido').isMongoId(),
     check('name','El nombre es obligatorio').not().isEmpty(),
     check('phone','Formato de teléfono incorrecto').isLength({min:10,max:10}),
